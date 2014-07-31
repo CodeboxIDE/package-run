@@ -6,15 +6,16 @@ define([
     var rpc = codebox.require("core/rpc");
     var dialogs = codebox.require("utils/dialogs");
 
-    // Browse/Find files
-    commands.register({
+    // Commands
+    var runProject = commands.register({
         id: "run.project",
         title: "Run: Project",
+        icon: "playback-play",
         shortcuts: [
             "alt+r"
         ],
         run: function() {
-
+            runProject.set("icon", "playback-pause");
         }
     });
 });

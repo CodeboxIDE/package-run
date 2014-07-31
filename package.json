@@ -7,10 +7,8 @@
     "engines": {
         "codebox": ">=1.0.0"
     },
-    "dependencies": {
-
-    },
     "packageDependencies": {
-        "terminal": "CodeboxIDE/package-terminal"
+        "terminal": "CodeboxIDE/package-terminal",
+        "project": "CodeboxIDE/package-project"
     }
 }
