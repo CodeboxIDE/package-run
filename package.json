@@ -1,0 +1,16 @@
+{
+    "name": "run",
+    "version": "0.0.0",
+    "main": "src/index",
+    "node": "node/index",
+    "description": "Project and file runner",
+    "engines": {
+        "codebox": ">=1.0.0"
+    },
+    "dependencies": {
+
+    },
+    "packageDependencies": {
+        "terminal": "CodeboxIDE/package-terminal"
+    }
+}
