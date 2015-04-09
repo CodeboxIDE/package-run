@@ -1,8 +1,8 @@
 {
     "name": "run",
     "version": "0.0.0",
-    "main": "src/index",
-    "node": "node/index",
+    "browser": "./src/index.js",
+    "main": "./node/index.js",
     "description": "Project and file runner",
     "engines": {
         "codebox": ">=1.0.0"
