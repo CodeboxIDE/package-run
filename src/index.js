@@ -22,3 +22,26 @@ var runProject = commands.register({
         });
     }
 });
+
+if (codebox.menubar) {
+    codebox.menubar.createMenu({
+        caption: "Run",
+        items: [
+            {
+                caption: "Run Project",
+                command: "run.project"
+            },
+            {
+                caption: "Run Project As...",
+                command: "run.project.as"
+            },
+            { type: "separator" },
+            {
+                caption: "Run File",
+                command: "run.file"
+            }
+        ]
+    });
+}
+
+
