@@ -14,6 +14,11 @@ var runProject = commands.register({
         "alt+r"
     ],
     run: function() {
-        runProject.set("icon", "playback-pause");
+        return rpc.execute("run/project")
+        .then(function(r) {
+            return commands.run("terminal.open", {
+                shellId: r.shellId
+            });
+        });
     }
 });
