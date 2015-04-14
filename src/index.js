@@ -6,22 +6,45 @@ var rpc = codebox.require("core/rpc");
 var dialogs = codebox.require("utils/dialogs");
 
 // Commands
-var runProject = commands.register({
-    id: "run.project",
-    title: "Run: Project",
-    icon: "playback-play",
-    shortcuts: [
-        "alt+r"
-    ],
-    run: function() {
-        return rpc.execute("run/project")
-        .then(function(r) {
-            return commands.run("terminal.open", {
-                shellId: r.shellId
+commands.register([
+    {
+        id: "run.project",
+        title: "Run: Project",
+        icon: "playback-play",
+        shortcuts: [
+            "alt+r"
+        ],
+        run: function() {
+            return rpc.execute("run/project")
+            .then(function(r) {
+                return commands.run("terminal.open", {
+                    shellId: r.shellId
+                });
             });
-        });
+        }
+    },
+    {
+        id: "run.file",
+        title: "Run: File",
+        icon: "playback-play",
+        shortcuts: [
+            "alt+shift+r"
+        ],
+        context: ["file"],
+        run: function(args, ctx) {
+            if (ctx.file.isBuffer() || ctx.file.isDirectory()) throw "Can't run buffer or directory";
+
+            return rpc.execute("run/file", {
+                file: ctx.file.get("path")
+            })
+            .then(function(r) {
+                return commands.run("terminal.open", {
+                    shellId: r.shellId
+                });
+            });
+        }
     }
-});
+]);
 
 if (codebox.menubar) {
     codebox.menubar.createMenu({
@@ -43,5 +66,3 @@ if (codebox.menubar) {
         ]
     });
 }
-
-

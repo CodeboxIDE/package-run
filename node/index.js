@@ -1,6 +1,9 @@
 var Q = require("q");
 var _ = require("lodash");
+var path = require("path");
 var ports = require("./ports");
+
+var fileRunners = require("./runners");
 
 module.exports = function(codebox) {
     var terminal = codebox.rpc.get("terminal");
@@ -10,7 +13,7 @@ module.exports = function(codebox) {
     codebox.logger.log("start run services");
 
     codebox.rpc.service("run", {
-        project: function() {
+        project: function(args) {
             var runId = _.uniqueId("run-project-");
 
             return Q.all([
@@ -40,8 +43,19 @@ module.exports = function(codebox) {
                 });
             });
         },
-        file: function() {
+        file: function(args) {
+            var runId = _.uniqueId("run-file-");
+            var filename = args.file;
+            if (!filename) throw "Need a filepath";
 
+            var ext = path.extname(filename).replace('.', '').toLowerCase();
+            var cmd = fileRunners[ext];
+            if (!cmd) throw "No runner found for this file";
+
+            return terminal.create({
+                shellId: runId,
+                command: cmd.replace("%s", filename)
+            });
         }
     });
 };
