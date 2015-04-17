@@ -5,7 +5,7 @@
     "main": "./node/index.js",
     "description": "Project and file runner",
     "engines": {
-        "codebox": ">=1.0.0"
+        "codebox": ">=1.0.0-alpha"
     },
     "dependencies": {
         "harbor": "0.3.0",
